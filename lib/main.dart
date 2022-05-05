@@ -38,9 +38,17 @@ class _MyAppState extends State<MyApp> {
               onPressed: () {
                 createPDF();
                 savePDF();
-                setState(() {
-                  _image.clear();
-                });
+Future.delayed(const Duration(milliseconds: 500), () {
+
+  setState(() {
+    _image.clear();
+  });
+
+});
+
+                // setState(() {
+                //   _image.clear();
+                // });
               }),
             // IconButton(
             //   icon: Icon(Icons.restore_page),
@@ -159,24 +167,35 @@ floatingActionButton: SpeedDial(
 
   getImageFromGallery() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    setState(() {
+
+Future.delayed(const Duration(milliseconds: 500), () {
+ setState(() {
       if (pickedFile != null) {
         _image.add(File(pickedFile.path));
       } else {
         print('No image selected');
       }
     });
+
+});
+
+    
+    
   }
 
 getImageFromCamera() async {
      final pickedFile = await picker.getImage(source: ImageSource.camera);
-    setState(() {
+    
+Future.delayed(const Duration(milliseconds: 500), () {
+ setState(() {
       if (pickedFile != null) {
         _image.add(File(pickedFile.path));
       } else {
         print('No image selected');
       }
     });
+
+});
 }
 
   createPDF() async {
@@ -252,14 +271,14 @@ class _AboutUsState extends State<AboutUs> {
           // style: TextStyle(fontSize: 22 ),
           // ),
 
-          Text("Janhavi Porwal    TE5 40", textAlign: TextAlign.start,
+          Text("Janhavi Porwal     TE5 40", textAlign: TextAlign.start,
         style: TextStyle(fontSize: 19 ),), 
         Text("Shivam Prajapati    TE5 41", textAlign: TextAlign.start,
         style: TextStyle(fontSize: 19 ),),
          Text("Sarim Qureshi    TE5 42", textAlign: TextAlign.start,
          style: TextStyle(fontSize: 19 ),         
          ),
-           Text("\n\nguided by", textAlign: TextAlign.start,
+           Text("\n\nGuided By", textAlign: TextAlign.start,
         style: TextStyle(fontSize: 15 ),),
           Text("Mr. Dhwaniket Kamble", textAlign: TextAlign.start,
         style: TextStyle(fontSize: 19 ),),
