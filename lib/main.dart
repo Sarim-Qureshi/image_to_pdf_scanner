@@ -30,7 +30,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Image To PDF"),
+        title: Text("Image To PDF Scanner"),
+        centerTitle: true, 
         actions: [
           IconButton(
               icon: Icon(Icons.picture_as_pdf),
@@ -100,11 +101,10 @@ class _MyAppState extends State<MyApp> {
                     title: Text('About Us'),
                     leading: Icon(Icons.person),
                     onTap: () {
-                      setState(() {
-                        _image.clear();
-                        
-                      });
-                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>  AboutUs()
+                      ));
                     }
                     
                   ),
@@ -214,4 +214,54 @@ getImageFromCamera() async {
       ),
     )..show(context);
   }
+}
+
+
+class AboutUs extends StatefulWidget {
+
+
+  @override
+  State<AboutUs> createState() => _AboutUsState();
+}
+
+class _AboutUsState extends State<AboutUs> {
+  @override
+  Widget build(BuildContext context) {
+     return Scaffold(
+       
+      appBar: AppBar(
+        title: Text("About Us"),
+        centerTitle: true, 
+        
+      ),
+      body: Column (
+        
+        children: <Widget>[
+          Text("\n\"Image to PDF Scanner\"", textAlign: TextAlign.start,
+          style: TextStyle(fontSize: 22 ),
+          ),
+          Text("\n Made by the following TE5 IT students of Shah & Anchor Kutchhi Engineering College for MAD&PWA lab during the academic year 2021-2022\n\n", textAlign: TextAlign.start,
+          style: TextStyle(fontSize: 22 ),
+          ),
+         
+         
+          // Text("\n\"Image to PDF Scanner\" \n made by the following TE5 IT students of Shah & Anchor Kutchhi Engineering College during the academic year 2021-2022 \nfor the lab MAD&PWA\n", textAlign: TextAlign.start,
+          // style: TextStyle(fontSize: 22 ),
+          // ),
+
+          Text("Janhavi Porwal    TE5 40", textAlign: TextAlign.start,
+        style: TextStyle(fontSize: 19 ),), 
+        Text("Shivam Prajapati    TE5 41", textAlign: TextAlign.start,
+        style: TextStyle(fontSize: 19 ),),
+         Text("Sarim Qureshi    TE5 42", textAlign: TextAlign.start,
+         style: TextStyle(fontSize: 19 ),         
+         ),
+           Text("\n\nguided by", textAlign: TextAlign.start,
+        style: TextStyle(fontSize: 15 ),),
+          Text("Mr. Dhwaniket Kamble", textAlign: TextAlign.start,
+        style: TextStyle(fontSize: 19 ),),
+         ],
+      )
+
+     );}
 }
