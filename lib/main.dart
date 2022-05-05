@@ -37,8 +37,69 @@ class _MyAppState extends State<MyApp> {
               onPressed: () {
                 createPDF();
                 savePDF();
-              })
+              }),
+            // IconButton(
+            //   icon: Icon(Icons.restore_page),
+            //   onPressed: () {
+            //    setState(() {
+            // _image.clear();
+            //   });
+            //   })
         ],
+      ),
+      drawer: Drawer(
+        backgroundColor: Colors.blue,
+        child: ListView(
+          padding: EdgeInsets.zero,
+              children: <Widget>[
+                DrawerHeader(
+                  child: Image.asset(
+                    'assets/images/logo_app.png',
+                  ),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color.fromARGB(255, 60, 140, 231),
+                        Color.fromARGB(255, 0, 234, 255),
+                      ],
+                    ),
+                  ),
+                ),
+                Divider(
+                  height: 2.0,
+                ),
+                ListTile(
+                  title: Center(
+                    child: Text('Image to PDF Scanner'),
+                  ),
+                  onTap: () {
+                    // Navigator.pop(context);
+                  },
+                ),
+                Divider(
+                  height: 2.0,
+                ),
+                Builder(
+                  builder: (context) => ListTile(
+                    title: Text('Clear Page'),
+                    leading: Icon(Icons.restore_page),
+                    onTap: () {
+                      setState(() {
+                        _image.clear();
+                        
+                      });
+                      Navigator.pop(context);
+                    }
+                    
+                  ),
+                )
+               
+              
+              ]
+        )
+      
       ),
       
 floatingActionButton: SpeedDial(
@@ -56,8 +117,8 @@ floatingActionButton: SpeedDial(
               label: 'Camera',
               backgroundColor: Color.fromARGB(255, 12, 144, 221),
               onTap: () {getImageFromCamera();},
-            ),
-          
+            )
+ 
           ]),
 
 
@@ -75,6 +136,7 @@ floatingActionButton: SpeedDial(
                   )),
             )
           : Container(),
+          
     );
   }
 
