@@ -1,116 +1,65 @@
 import 'dart:io';
 
 import 'package:flushbar/flushbar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:provider/provider.dart';
-
-import 'theme_provider.dart';
 
 main() {
   runApp(MaterialApp(
-    home: ChangeNotifierProvider<DynamicTheme>(create: (_) => DynamicTheme(),
-    // debugShowCheckedModeBanner: false,
-    child: MyApp())
+    debugShowCheckedModeBanner: false,
+    home: MyApp(),
   ));
 }
+
 class MyApp extends StatefulWidget {
   @override
-    _MyAppState createState() => _MyAppState();
+  _MyAppState createState() => _MyAppState();
 }
+
 class _MyAppState extends State<MyApp> {
   final picker = ImagePicker();
   final pdf = pw.Document();
   List<File> _image = [];
-   @override
+
+
+  
+  @override
   Widget build(BuildContext context) {
-
-  final themeProvider = Provider.of<DynamicTheme>(context);
- 
-  return Scaffold(
-     
-
-            appBar: AppBar(
-             
-        backgroundColor: Theme.of(context).primaryColor,
-        title: Text("Image to PDF"),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Image To PDF"),
         actions: [
           IconButton(
               icon: Icon(Icons.picture_as_pdf),
               onPressed: () {
                 createPDF();
                 savePDF();
-              }),
+              })
         ],
-              )
-      ,
-      
-      drawer: Drawer(
-        backgroundColor: Color.fromARGB(255, 48, 153, 185),
-        child: ListView(
-          padding: EdgeInsets.zero,
-              children: <Widget>[
-                DrawerHeader(
-                  child: Image.asset(
-                    'assets/images/logo_app.png',
-                  ),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Color.fromARGB(255, 60, 140, 231),
-                        Color.fromARGB(255, 0, 234, 255),
-                      ],
-                    ),
-                  ),
-                ),
-                Divider(
-                  height: 2.0,
-                ),
-                ListTile(
-                  title: Center(
-                    child: Text('Image to PDF Scanner'),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                  Builder(
-                  builder: (context) => ListTile(
-                    title: Text('Toggle Dark mode'),
-                    leading: Icon(Icons.brightness_4),
-                    onTap: () {
-                      setState(() {
-                        themeProvider.changeDarkMode(!themeProvider.isDarkMode);
-                      });
-                      Navigator.pop(context);
-                    },
-                    trailing: CupertinoSwitch(
-                      value: themeProvider.getDarkMode(),
-                      onChanged: (value) {
-                        setState(() {
-                          themeProvider.changeDarkMode(value);
-                        });
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
-                ),
-              ]
-        )
-      
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   child: Icon(Icons.add),
+      //   onPressed: getImageFromGallery,
+      // ),
       
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: getImageFromGallery,
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: getImageFromGallery,
+            child: Icon(Icons.photo),
+          ),
+          FloatingActionButton(
+            onPressed: getImageFromCamera,
+            child: Icon(Icons.camera_alt),
+            
+          ),
+        ]
       ),
-    
+
       body: _image != null
           ? ListView.builder(
               itemCount: _image.length,
@@ -121,9 +70,7 @@ class _MyAppState extends State<MyApp> {
                   child: Image.file(
                     _image[index],
                     fit: BoxFit.cover,
-                  ),
-                  
-                  ),
+                  )),
             )
           : Container(),
     );
@@ -139,6 +86,17 @@ class _MyAppState extends State<MyApp> {
       }
     });
   }
+
+getImageFromCamera() async {
+     final pickedFile = await picker.getImage(source: ImageSource.camera);
+    setState(() {
+      if (pickedFile != null) {
+        _image.add(File(pickedFile.path));
+      } else {
+        print('No image selected');
+      }
+    });
+}
 
   createPDF() async {
     for (var img in _image) {
@@ -161,7 +119,7 @@ class _MyAppState extends State<MyApp> {
        +"_"+now.hour.toString()+":"+now.minute.toString()+":"+now.second.toString()
        +":"+now.millisecond.toString()+".pdf");
       await file.writeAsBytes(await pdf.save());
-      showPrintedMessage('success', 'saved to documents');
+      showPrintedMessage('Success', 'Saved To Documents');
     } catch (e) {
       showPrintedMessage('error', e.toString());
     }
@@ -178,10 +136,4 @@ class _MyAppState extends State<MyApp> {
       ),
     )..show(context);
   }
-
-
-
 }
-
-
-
