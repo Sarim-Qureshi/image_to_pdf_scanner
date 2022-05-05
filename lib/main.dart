@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -45,20 +45,45 @@ class _MyAppState extends State<MyApp> {
       //   onPressed: getImageFromGallery,
       // ),
       
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: getImageFromGallery,
-            child: Icon(Icons.photo),
-          ),
-          FloatingActionButton(
-            onPressed: getImageFromCamera,
-            child: Icon(Icons.camera_alt),
+      // floatingActionButton: Row(
+      //   mainAxisAlignment: MainAxisAlignment.end,
+      //   children: [
+      //     FloatingActionButton(
+      //       onPressed: getImageFromGallery,
+      //       child: Icon(Icons.photo),
+      //     ),
+      //     FloatingActionButton(
+      //       onPressed: getImageFromCamera,
+      //       child: Icon(Icons.camera_alt),
             
-          ),
-        ]
-      ),
+      //     ),
+      //   ]
+      // ),
+floatingActionButton: SpeedDial(
+          icon: Icons.add,
+          backgroundColor: Color.fromARGB(255, 12, 144, 221),
+          children: [
+            SpeedDialChild(
+              child: const Icon(Icons.browse_gallery),
+              label: 'Gallery/Documents',
+              backgroundColor: Color.fromARGB(255, 12, 144, 221),
+              onTap: () {getImageFromGallery();},
+            ),
+            SpeedDialChild(
+              child: const Icon(Icons.add_a_photo),
+              label: 'Camera',
+              backgroundColor: Color.fromARGB(255, 12, 144, 221),
+              onTap: () {getImageFromCamera();},
+            ),
+            // SpeedDialChild(
+            //   child: const Icon(Icons.chat),
+            //   label: 'Message',
+            //   backgroundColor: Colors.amberAccent,
+            //   onTap: () {/* Do something */},
+            // ),
+          ]),
+
+
 
       body: _image != null
           ? ListView.builder(
