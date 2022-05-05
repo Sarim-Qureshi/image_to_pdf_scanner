@@ -40,25 +40,7 @@ class _MyAppState extends State<MyApp> {
               })
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   child: Icon(Icons.add),
-      //   onPressed: getImageFromGallery,
-      // ),
       
-      // floatingActionButton: Row(
-      //   mainAxisAlignment: MainAxisAlignment.end,
-      //   children: [
-      //     FloatingActionButton(
-      //       onPressed: getImageFromGallery,
-      //       child: Icon(Icons.photo),
-      //     ),
-      //     FloatingActionButton(
-      //       onPressed: getImageFromCamera,
-      //       child: Icon(Icons.camera_alt),
-            
-      //     ),
-      //   ]
-      // ),
 floatingActionButton: SpeedDial(
           icon: Icons.add,
           backgroundColor: Color.fromARGB(255, 12, 144, 221),
@@ -75,12 +57,7 @@ floatingActionButton: SpeedDial(
               backgroundColor: Color.fromARGB(255, 12, 144, 221),
               onTap: () {getImageFromCamera();},
             ),
-            // SpeedDialChild(
-            //   child: const Icon(Icons.chat),
-            //   label: 'Message',
-            //   backgroundColor: Colors.amberAccent,
-            //   onTap: () {/* Do something */},
-            // ),
+          
           ]),
 
 
