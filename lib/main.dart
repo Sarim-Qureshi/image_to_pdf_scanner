@@ -38,6 +38,9 @@ class _MyAppState extends State<MyApp> {
               onPressed: () {
                 createPDF();
                 savePDF();
+                setState(() {
+                  _image.clear();
+                });
               }),
             // IconButton(
             //   icon: Icon(Icons.restore_page),
