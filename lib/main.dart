@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
               children: <Widget>[
                 DrawerHeader(
                   child: Image.asset(
-                    'assets/images/logo_app.png',
+                    'assets/images/logo.png',
                   ),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -94,7 +94,21 @@ class _MyAppState extends State<MyApp> {
                     }
                     
                   ),
-                )
+                ),
+                Builder(
+                  builder: (context) => ListTile(
+                    title: Text('About Us'),
+                    leading: Icon(Icons.person),
+                    onTap: () {
+                      setState(() {
+                        _image.clear();
+                        
+                      });
+                      Navigator.pop(context);
+                    }
+                    
+                  ),
+                ),
                
               
               ]
@@ -107,7 +121,7 @@ floatingActionButton: SpeedDial(
           backgroundColor: Color.fromARGB(255, 12, 144, 221),
           children: [
             SpeedDialChild(
-              child: const Icon(Icons.browse_gallery),
+              child: const Icon(Icons.photo),
               label: 'Gallery/Documents',
               backgroundColor: Color.fromARGB(255, 12, 144, 221),
               onTap: () {getImageFromGallery();},
